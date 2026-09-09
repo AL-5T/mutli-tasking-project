@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multitasking Test</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #111827;
+    color: white;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    height: 70px;
+    background: #1f2937;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    border-bottom: 2px solid #374151;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.stats {
+    display: flex;
+    gap: 25px;
+}
+
+/* =========================
+   START SCREEN
+========================= */
+
+.start-screen {
+    max-width: 700px;
+    margin: 100px auto;
+    background: #1f2937;
+    border-radius: 15px;
+    padding: 50px;
+    text-align: center;
+}
+
+.start-screen h1 {
+    font-size: 42px;
+    margin-bottom: 25px;
+}
+
+.start-screen p {
+    font-size: 18px;
+    color: #d1d5db;
+    margin: 15px;
+}
+
+.start-button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 16px 40px;
+    margin-top: 25px;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.start-button:hover {
+    background: #1d4ed8;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.nav {
+    background: #374151;
+    display: none;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+.nav button {
+    position: relative;
+    background: #4b5563;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.nav button:hover {
+    background: #6b7280;
+}
+
+.nav button.active {
+    background: #2563eb;
+}
+
+.alert-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ef4444;
+    color: white;
+    border-radius: 50%;
+    width: 23px;
+    height: 23px;
+    font-size: 13px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+/* =========================
+   PAGES
+========================= */
+
+.page {
+    display: none;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.page.active {
+    display: block;
+}
+
+/* =========================
+   MATH
+========================= */
+
+.test-box {
+    background: #1f2937;
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+}
+
+#question {
+    font-size: 50px;
+    margin: 35px;
+}
+
+#answer {
+    font-size: 28px;
+    padding: 12px;
+    width: 200px;
+    text-align: center;
+    border-radius: 8px;
+    border: none;
+}
+
+.main-button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 13px 30px;
+    margin-top: 15px;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.main-button:hover {
+    background: #1d4ed8;
+}
+
+/* =========================
+   ALERTS
+========================= */
+
+.alerts-box {
+    background: #1f2937;
+    border-radius: 15px;
+    padding: 30px;
+}
+
+.alerts-box h2 {
+    margin-top: 0;
+}
+
+.no-alerts {
+    text-align: center;
+    padding: 50px;
+    color: #9ca3af;
+}
+
+.alert {
+    background: #7f1d1d;
+    border: 2px solid #ef4444;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.alert h3 {
+    margin-top: 0;
+    font-size: 20px;
+}
+
+.alert p {
+    color: #fecaca;
+}
+
+.alert-timer {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.complete-button {
+    background: white;
+    color: #991b1b;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 7px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.complete-button:hover {
+    background: #fee2e2;
+}
+
+/* =========================
+   RESULT
+========================= */
+
+#result {
+    display: none;
+    max-width: 700px;
+    margin: 80px auto;
+    background: #1f2937;
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+}
+
+#result h1 {
+    font-size: 40px;
+}
+
+.pass {
+    color: #22c55e;
+}
+
+.fail {
+    color: #ef4444;
+}
+
+.result-stat {
+    font-size: 20px;
+    margin: 15px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<div class="header">
+
+    <h1>🧠 Multitasking Test</h1>
+
+    <div class="stats">
+
+        <span>
+            Math:
+            <b id="score">0</b>
+        </span>
+
+        <span>
+            Question:
+            <b id="questionNumber">1</b>/15
+        </span>
+
+        <span>
+            Time:
+            <b id="time">90</b>s
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     START SCREEN
+========================= -->
+
+<div id="startScreen" class="start-screen">
+
+    <h1>🧠 Multitasking Test</h1>
+
+    <p>
+        You will solve simple math problems while
+        responding to urgent alerts.
+    </p>
+
+    <p>
+        🚨 Alerts can appear while you are doing math.
+    </p>
+
+    <p>
+        ⚠️ You must complete every alert before
+        its timer reaches zero.
+    </p>
+
+    <button
+        class="start-button"
+        onclick="startTest()">
+
+        ▶ Start Test
+
+    </button>
+
+</div>
+
+
+<!-- =========================
+     NAVIGATION
+========================= -->
+
+<div id="navigation" class="nav">
+
+    <button
+        id="mathNav"
+        class="active"
+        onclick="showPage('math')">
+
+        🧮 Math
+
+    </button>
+
+
+    <button
+        id="alertsNav"
+        onclick="showPage('alerts')">
+
+        🚨 Alerts
+
+        <span
+            id="alertCount"
+            class="alert-count">
+
+            0
+
+        </span>
+
+    </button>
+
+</div>
+
+
+<!-- =========================
+     MATH PAGE
+========================= -->
+
+<div id="mathPage" class="page">
+
+    <div class="test-box">
+
+        <h2>Math Test</h2>
+
+        <p>
+            Solve each problem as quickly and accurately
+            as possible.
+        </p>
+
+        <p>
+            🚨 Check the Alerts page when an alert appears.
+        </p>
+
+        <div id="question">
+            Loading...
+        </div>
+
+        <input
+            id="answer"
+            type="number"
+            autocomplete="off"
+        >
+
+        <br>
+
+        <button
+            class="main-button"
+            onclick="submitAnswer()">
+
+            Submit Answer
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     ALERTS PAGE
+========================= -->
+
+<div id="alertsPage" class="page">
+
+    <div class="alerts-box">
+
+        <h2>🚨 Urgent Alerts</h2>
+
+        <p>
+            Complete every alert before the timer reaches zero.
+        </p>
+
+        <div id="alertsList">
+
+            <div class="no-alerts">
+                No alerts right now.
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     RESULT SCREEN
+========================= -->
+
+<div id="result">
+
+    <h1 id="resultTitle"></h1>
+
+    <p id="resultMessage"></p>
+
+    <div class="result-stat">
+        Math Score:
+        <b id="finalMath">0</b>/15
+    </div>
+
+    <div class="result-stat">
+        Alerts Completed:
+        <b id="finalAlerts">0</b>
+    </div>
+
+    <button
+        class="main-button"
+        onclick="tryAgain()">
+
+        🔄 Try Again
+
+    </button>
+
+</div>
+
+
+<script>
+
+/* =========================
+   VARIABLES
+========================= */
+
+let currentQuestion = 0;
+let mathScore = 0;
+let correctAnswer = 0;
+
+let timeLeft = 90;
+
+let testStarted = false;
+let testOver = false;
+
+let alertID = 0;
+let activeAlerts = 0;
+let alertsCompleted = 0;
+
+let notificationTimeout = null;
+let mainTimer = null;
+
+let alertCountdowns = [];
+
+
+/* =========================
+   START TEST
+========================= */
+
+function startTest() {
+
+    if (testStarted) return;
+
+    testStarted = true;
+    testOver = false;
+
+    document.getElementById("startScreen").style.display = "none";
+
+    document.getElementById("navigation").style.display = "flex";
+
+    document.getElementById("mathPage").classList.add("active");
+
+    generateQuestion();
+
+    document.getElementById("answer").focus();
+
+    startTimer();
+
+    scheduleAlert();
+}
+
+
+/* =========================
+   START TIMER
+========================= */
+
+function startTimer() {
+
+    clearInterval(mainTimer);
+
+    mainTimer = setInterval(function() {
+
+        if (testOver) return;
+
+        timeLeft--;
+
+        document.getElementById("time").textContent = timeLeft;
+
+        if (timeLeft <= 0) {
+
+            failTest("You ran out of time.");
+
+        }
+
+    }, 1000);
+}
+
+
+/* =========================
+   PAGE SWITCHING
+========================= */
+
+function showPage(page) {
+
+    if (!testStarted || testOver) return;
+
+    document.getElementById("mathPage").classList.remove("active");
+
+    document.getElementById("alertsPage").classList.remove("active");
+
+    document.getElementById("mathNav").classList.remove("active");
+
+    document.getElementById("alertsNav").classList.remove("active");
+
+
+    if (page === "math") {
+
+        document.getElementById("mathPage").classList.add("active");
+
+        document.getElementById("mathNav").classList.add("active");
+
+        document.getElementById("answer").focus();
+
+    }
+
+
+    if (page === "alerts") {
+
+        document.getElementById("alertsPage").classList.add("active");
+
+        document.getElementById("alertsNav").classList.add("active");
+
+    }
+
+}
+
+
+/* =========================
+   GENERATE MATH QUESTION
+========================= */
+
+function generateQuestion() {
+
+    let a = Math.floor(Math.random() * 15) + 1;
+
+    let b = Math.floor(Math.random() * 15) + 1;
+
+    let type = Math.floor(Math.random() * 3);
+
+
+    if (type === 0) {
+
+        correctAnswer = a + b;
+
+        document.getElementById("question").textContent =
+            `${a} + ${b} = ?`;
+
+    }
+
+
+    else if (type === 1) {
+
+        if (a < b) {
+            [a, b] = [b, a];
+        }
+
+        correctAnswer = a - b;
+
+        document.getElementById("question").textContent =
+            `${a} − ${b} = ?`;
+
+    }
+
+
+    else {
+
+        a = Math.floor(Math.random() * 10) + 1;
+
+        b = Math.floor(Math.random() * 10) + 1;
+
+        correctAnswer = a * b;
+
+        document.getElementById("question").textContent =
+            `${a} × ${b} = ?`;
+
+    }
+
+}
+
+
+/* =========================
+   SUBMIT MATH
+========================= */
+
+function submitAnswer() {
+
+    if (testOver) return;
+
+    let answer =
+        Number(document.getElementById("answer").value);
+
+
+    if (answer === correctAnswer) {
+
+        mathScore++;
+
+        document.getElementById("score").textContent =
+            mathScore;
+
+    }
+
+
+    currentQuestion++;
+
+
+    if (currentQuestion >= 15) {
+
+        finishTest();
+
+        return;
+
+    }
+
+
+    document.getElementById("questionNumber").textContent =
+        currentQuestion + 1;
+
+
+    document.getElementById("answer").value = "";
+
+
+    generateQuestion();
+
+}
+
+
+/* =========================
+   CREATE ALERT
+========================= */
+
+function createAlert() {
+
+    if (testOver) return;
+
+
+    alertID++;
+
+    activeAlerts++;
+
+    updateAlertCount();
+
+
+    let id = alertID;
+
+
+    const alertTypes = [
+
+        {
+            title: "🚨 URGENT SYSTEM ALERT",
+            message: "System attention is required. Confirm this alert."
+        },
+
+        {
+            title: "⚠️ PRIORITY MESSAGE",
+            message: "This message requires immediate acknowledgement."
+        },
+
+        {
+            title: "🔴 IMPORTANT NOTICE",
+            message: "Please confirm that you received this notification."
+        },
+
+        {
+            title: "🚨 ACTION REQUIRED",
+            message: "Complete this alert before the timer expires."
+        }
+
+    ];
+
+
+    let selected =
+        alertTypes[
+            Math.floor(Math.random() * alertTypes.length)
+        ];
+
+
+    let alertElement =
+        document.createElement("div");
+
+
+    alertElement.className = "alert";
+
+    alertElement.id = "alert-" + id;
+
+
+    alertElement.innerHTML = `
+
+        <h3>${selected.title}</h3>
+
+        <p>${selected.message}</p>
+
+        <p>
+            Time remaining:
+            <span
+                class="alert-timer"
+                id="timer-${id}">
+                8
+            </span>
+            seconds
+        </p>
+
+        <button
+            class="complete-button"
+            onclick="completeAlert(${id})">
+
+            ✓ Complete Alert
+
+        </button>
+
+    `;
+
+
+    let list =
+        document.getElementById("alertsList");
+
+
+    let noAlerts =
+        list.querySelector(".no-alerts");
+
+
+    if (noAlerts) {
+        noAlerts.remove();
+    }
+
+
+    list.appendChild(alertElement);
+
+
+    /*
+       Alert countdown
+    */
+
+    let seconds = 8;
+
+
+    let countdown =
+        setInterval(function() {
+
+            if (testOver) {
+
+                clearInterval(countdown);
+
+                return;
+
+            }
+
+
+            seconds--;
+
+
+            let timer =
+                document.getElementById("timer-" + id);
+
+
+            if (timer) {
+                timer.textContent = seconds;
+            }
+
+
+            if (seconds <= 0) {
+
+                clearInterval(countdown);
+
+                if (!testOver) {
+
+                    failTest(
+                        "You missed an urgent alert."
+                    );
+
+                }
+
+            }
+
+        }, 1000);
+
+
+    alertCountdowns.push(countdown);
+
+}
+
+
+/* =========================
+   COMPLETE ALERT
+========================= */
+
+function completeAlert(id) {
+
+    if (testOver) return;
+
+
+    let alertElement =
+        document.getElementById("alert-" + id);
+
+
+    if (!alertElement) return;
+
+
+    /*
+       Find and stop this alert's timer
+    */
+
+    let timerIndex = -1;
+
+    for (let i = 0; i < alertCountdowns.length; i++) {
+
+        /*
+           The timer itself cannot identify the alert,
+           so the element is removed and the countdown
+           is harmless once the alert is completed.
+        */
+
+    }
+
+
+    alertElement.remove();
+
+
+    activeAlerts--;
+
+    alertsCompleted++;
+
+
+    updateAlertCount();
+
+
+    let remaining =
+        document.querySelectorAll(".alert");
+
+
+    if (remaining.length === 0) {
+
+        document.getElementById("alertsList").innerHTML = `
+
+            <div class="no-alerts">
+                All alerts completed ✓
+            </div>
+
+        `;
+
+    }
+
+
+    /*
+       Return to the Math page
+    */
+
+    showPage("math");
+
+}
+
+
+/* =========================
+   ALERT COUNTER
+========================= */
+
+function updateAlertCount() {
+
+    let counter =
+        document.getElementById("alertCount");
+
+
+    counter.textContent = activeAlerts;
+
+
+    if (activeAlerts > 0) {
+
+        counter.style.display = "flex";
+
+    }
+
+    else {
+
+        counter.style.display = "none";
+
+    }
+
+}
+
+
+/* =========================
+   SCHEDULE ALERT
+========================= */
+
+function scheduleAlert() {
+
+    if (testOver) return;
+
+
+    let delay =
+        Math.floor(Math.random() * 7000) + 5000;
+
+
+    notificationTimeout =
+        setTimeout(function() {
+
+            createAlert();
+
+            scheduleAlert();
+
+        }, delay);
+
+}
+
+
+/* =========================
+   CLEAR ALL ALERT TIMERS
+========================= */
+
+function clearAlertTimers() {
+
+    alertCountdowns.forEach(function(timer) {
+
+        clearInterval(timer);
+
+    });
+
+    alertCountdowns = [];
+
+}
+
+
+/* =========================
+   FAIL TEST
+========================= */
+
+function failTest(reason) {
+
+    if (testOver) return;
+
+
+    testOver = true;
+
+
+    clearInterval(mainTimer);
+
+    clearTimeout(notificationTimeout);
+
+    clearAlertTimers();
+
+
+    document.getElementById("mathPage").style.display = "none";
+
+    document.getElementById("alertsPage").style.display = "none";
+
+    document.getElementById("navigation").style.display = "none";
+
+
+    document.getElementById("result").style.display = "block";
+
+
+    document.getElementById("resultTitle").textContent =
+        "❌ TEST FAILED";
+
+
+    document.getElementById("resultTitle").className =
+        "fail";
+
+
+    document.getElementById("resultMessage").textContent =
+        reason;
+
+
+    document.getElementById("finalMath").textContent =
+        mathScore;
+
+
+    document.getElementById("finalAlerts").textContent =
+        alertsCompleted;
+
+}
+
+
+/* =========================
+   FINISH TEST
+========================= */
+
+function finishTest() {
+
+    if (testOver) return;
+
+
+    testOver = true;
+
+
+    clearInterval(mainTimer);
+
+    clearTimeout(notificationTimeout);
+
+    clearAlertTimers();
+
+
+    document.getElementById("mathPage").style.display = "none";
+
+    document.getElementById("alertsPage").style.display = "none";
+
+    document.getElementById("navigation").style.display = "none";
+
+
+    document.getElementById("result").style.display = "block";
+
+
+    document.getElementById("resultTitle").textContent =
+        "🎉 TEST COMPLETE";
+
+
+    document.getElementById("resultTitle").className =
+        "pass";
+
+
+    document.getElementById("resultMessage").textContent =
+        "You completed the multitasking test!";
+
+
+    document.getElementById("finalMath").textContent =
+        mathScore;
+
+
+    document.getElementById("finalAlerts").textContent =
+        alertsCompleted;
+
+}
+
+
+/* =========================
+   TRY AGAIN
+========================= */
+
+function tryAgain() {
+
+    /*
+       Stop everything from the previous test
+    */
+
+    clearInterval(mainTimer);
+
+    clearTimeout(notificationTimeout);
+
+    clearAlertTimers();
+
+
+    /*
+       Reset variables
+    */
+
+    currentQuestion = 0;
+
+    mathScore = 0;
+
+    correctAnswer = 0;
+
+    timeLeft = 90;
+
+    testStarted = true;
+
+    testOver = false;
+
+    alertID = 0;
+
+    activeAlerts = 0;
+
+    alertsCompleted = 0;
+
+
+    /*
+       Reset scoreboard
+    */
+
+    document.getElementById("score").textContent = "0";
+
+    document.getElementById("questionNumber").textContent = "1";
+
+    document.getElementById("time").textContent = "90";
+
+
+    /*
+       Remove old alerts
+    */
+
+    document.getElementById("alertsList").innerHTML = `
+
+        <div class="no-alerts">
+            No alerts right now.
+        </div>
+
+    `;
+
+
+    updateAlertCount();
+
+
+    /*
+       Hide result screen
+    */
+
+    document.getElementById("result").style.display = "none";
+
+
+    /*
+       Show navigation
+    */
+
+    document.getElementById("navigation").style.display = "flex";
+
+
+    /*
+       Show Math page immediately
+    */
+
+    document.getElementById("mathPage").style.display = "block";
+
+    document.getElementById("mathPage").classList.add("active");
+
+
+    document.getElementById("alertsPage").classList.remove("active");
+
+
+    /*
+       Set Math tab as active
+    */
+
+    document.getElementById("mathNav").classList.add("active");
+
+    document.getElementById("alertsNav").classList.remove("active");
+
+
+    /*
+       Generate completely new question
+    */
+
+    generateQuestion();
+
+
+    document.getElementById("answer").value = "";
+
+    document.getElementById("answer").focus();
+
+
+    /*
+       Restart timer
+    */
+
+    startTimer();
+
+
+    /*
+       Start new alerts
+    */
+
+    scheduleAlert();
+
+}
+
+</script>
+
+</body>
+</html>
