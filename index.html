@@ -3,1703 +3,876 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Multitasking Test</title>
-
 <style>
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #111827;
-    color: white;
-}
-
-button {
-    font-family: inherit;
-}
-
-/* HEADER */
-
-.header {
-    height: 70px;
-    background: #1f2937;
-    border-bottom: 2px solid #374151;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 0 25px;
-}
-
-.header h1 {
-    margin: 0;
-    font-size: 22px;
-}
-
-.stats {
-    display: flex;
-    gap: 25px;
-    font-size: 16px;
-}
-
-/* START SCREEN */
-
-.start-screen {
-    max-width: 700px;
-    margin: 100px auto;
-
-    background: #1f2937;
-    border-radius: 15px;
-
-    padding: 50px;
-    text-align: center;
-}
-
-.start-screen h1 {
-    font-size: 42px;
-    margin-bottom: 25px;
-}
-
-.start-screen p {
-    color: #d1d5db;
-    font-size: 18px;
-    line-height: 1.6;
-}
-
-.start-button {
-    margin-top: 25px;
-
-    background: #2563eb;
-    color: white;
-
-    border: none;
-    border-radius: 8px;
-
-    padding: 16px 40px;
-
-    font-size: 20px;
-
-    cursor: pointer;
-}
-
-.start-button:hover {
-    background: #1d4ed8;
-}
-
-/* NAVIGATION */
-
-.nav {
-    display: none;
-
-    justify-content: center;
-    gap: 10px;
-
-    background: #374151;
-    padding: 10px;
-}
-
-.nav button {
-    position: relative;
-
-    background: #4b5563;
-    color: white;
-
-    border: none;
-    border-radius: 8px;
-
-    padding: 12px 30px;
-
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.nav button:hover {
-    background: #6b7280;
-}
-
-.nav button.active {
-    background: #2563eb;
-}
-
-.alert-count {
-    position: absolute;
-
-    top: -8px;
-    right: -8px;
-
-    width: 24px;
-    height: 24px;
-
-    background: #ef4444;
-
-    border-radius: 50%;
-
-    display: none;
-
-    align-items: center;
-    justify-content: center;
-
-    font-size: 13px;
-    font-weight: bold;
-}
-
-/* PAGES */
-
-.page {
-    display: none;
-
-    max-width: 900px;
-
-    margin: 40px auto;
-
-    padding: 20px;
-}
-
-.page.active {
-    display: block;
-}
-
-/* MATH */
-
-.test-box {
-    background: #1f2937;
-
-    border-radius: 15px;
-
-    padding: 40px;
-
-    text-align: center;
-}
-
-.test-box h2 {
-    margin-top: 0;
-}
-
-#question {
-    font-size: 50px;
-    margin: 40px 0;
-}
-
-#answer {
-    width: 220px;
-
-    padding: 12px;
-
-    font-size: 28px;
-
-    text-align: center;
-
-    border: none;
-    border-radius: 8px;
-}
-
-.main-button {
-    background: #2563eb;
-    color: white;
-
-    border: none;
-    border-radius: 8px;
-
-    padding: 13px 30px;
-
-    margin-top: 15px;
-
-    font-size: 18px;
-
-    cursor: pointer;
-}
-
-.main-button:hover {
-    background: #1d4ed8;
-}
-
-/* CODE WORD */
-
-.code-box {
-    margin-top: 35px;
-
-    padding: 20px;
-
-    background: #111827;
-
-    border: 2px solid #374151;
-
-    border-radius: 12px;
-}
-
-.code-box h3 {
-    margin-top: 0;
-}
-
-#codeWord {
-    font-size: 32px;
-
-    letter-spacing: 8px;
-
-    font-weight: bold;
-
-    min-height: 45px;
-}
-
-.code-letter {
-    display: inline-block;
-
-    margin: 0 4px;
-
-    color: #60a5fa;
-}
-
-/* ALERTS */
-
-.alerts-box {
-    background: #1f2937;
-
-    border-radius: 15px;
-
-    padding: 30px;
-}
-
-.alerts-box h2 {
-    margin-top: 0;
-}
-
-.no-alerts {
-    text-align: center;
-
-    padding: 50px;
-
-    color: #9ca3af;
-}
-
-.alert {
-    background: #7f1d1d;
-
-    border: 2px solid #ef4444;
-
-    border-radius: 12px;
-
-    padding: 20px;
-
-    margin-bottom: 15px;
-}
-
-.alert h3 {
-    margin-top: 0;
-
-    font-size: 20px;
-}
-
-.alert p {
-    color: #fecaca;
-}
-
-.alert-timer {
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.complete-button {
-    background: white;
-
-    color: #991b1b;
-
-    border: none;
-    border-radius: 7px;
-
-    padding: 12px 20px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-}
-
-.complete-button:hover {
-    background: #fee2e2;
-}
-
-/* RESULT */
-
-#result {
-    display: none;
-
-    max-width: 700px;
-
-    margin: 80px auto;
-
-    background: #1f2937;
-
-    border-radius: 15px;
-
-    padding: 40px;
-
-    text-align: center;
-}
-
-#result h1 {
-    font-size: 40px;
-}
-
-.pass {
-    color: #22c55e;
-}
-
-.fail {
-    color: #ef4444;
-}
-
-.result-stat {
-    font-size: 20px;
-
-    margin: 15px;
-}
-
-/* MOBILE */
-
-@media (max-width: 700px) {
+    * { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #111827;
+        color: #fff;
+    }
+
+    button, input { font: inherit; }
 
     .header {
-        height: auto;
+        min-height: 72px;
+        background: #1f2937;
+        border-bottom: 2px solid #374151;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 14px 24px;
+    }
 
-        padding: 15px;
-
-        flex-direction: column;
-
-        gap: 12px;
+    .header h1 {
+        margin: 0;
+        font-size: 22px;
     }
 
     .stats {
-        gap: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        justify-content: flex-end;
+        font-size: 15px;
+    }
 
-        font-size: 14px;
+    .start-screen,
+    .page,
+    #result {
+        max-width: 900px;
+        margin: 45px auto;
+        padding: 20px;
+    }
+
+    .start-card,
+    .test-box,
+    .alerts-box,
+    #result {
+        background: #1f2937;
+        border-radius: 16px;
+        padding: 36px;
+        box-shadow: 0 12px 35px rgba(0,0,0,.22);
     }
 
     .start-screen {
-        margin: 50px 20px;
-        padding: 30px;
+        text-align: center;
     }
 
-    .start-screen h1 {
-        font-size: 32px;
+    .start-screen h2 {
+        margin-top: 0;
+        font-size: 40px;
     }
+
+    .start-screen p {
+        color: #d1d5db;
+        line-height: 1.6;
+    }
+
+    .primary {
+        margin-top: 18px;
+        border: 0;
+        border-radius: 9px;
+        background: #2563eb;
+        color: white;
+        padding: 14px 26px;
+        cursor: pointer;
+        font-weight: 700;
+    }
+
+    .primary:hover { background: #1d4ed8; }
+
+    .nav {
+        display: none;
+        justify-content: center;
+        gap: 10px;
+        background: #374151;
+        padding: 10px;
+    }
+
+    .nav button {
+        position: relative;
+        border: 0;
+        border-radius: 9px;
+        background: #4b5563;
+        color: white;
+        padding: 12px 28px;
+        cursor: pointer;
+    }
+
+    .nav button.active { background: #2563eb; }
+    .nav button:hover { background: #6b7280; }
+
+    .alert-count {
+        position: absolute;
+        top: -7px;
+        right: -7px;
+        min-width: 23px;
+        height: 23px;
+        padding: 0 6px;
+        border-radius: 999px;
+        background: #ef4444;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 800;
+        border: 2px solid #374151;
+    }
+
+    .page { display: none; }
+    .page.active { display: block !important; }
+
+    .test-box { text-align: center; }
 
     #question {
-        font-size: 38px;
+        font-size: clamp(36px, 8vw, 58px);
+        margin: 38px 0 26px;
+        font-weight: 700;
     }
 
-}
+    #answer {
+        width: 220px;
+        max-width: 100%;
+        padding: 13px;
+        border: 0;
+        border-radius: 9px;
+        font-size: 28px;
+        text-align: center;
+    }
 
+    #answer:focus {
+        outline: 3px solid #60a5fa;
+    }
+
+    .code-box {
+        margin-top: 32px;
+        padding: 18px;
+        background: #111827;
+        border: 1px solid #374151;
+        border-radius: 12px;
+    }
+
+    .code-box h3 { margin: 0 0 8px; }
+
+    #codeWord {
+        min-height: 48px;
+        font-size: 34px;
+        letter-spacing: 8px;
+        font-weight: 800;
+    }
+
+    .code-letter {
+        display: inline-block;
+        color: #60a5fa;
+    }
+
+    .code-empty {
+        color: #6b7280;
+        letter-spacing: 2px;
+    }
+
+    .alerts-box h2 { margin-top: 0; }
+
+    .no-alerts {
+        padding: 45px 15px;
+        text-align: center;
+        color: #9ca3af;
+    }
+
+    .alert {
+        background: #7f1d1d;
+        border: 2px solid #ef4444;
+        border-radius: 12px;
+        padding: 20px;
+        margin: 14px 0;
+    }
+
+    .alert h3 {
+        margin: 0 0 10px;
+        font-size: 20px;
+    }
+
+    .alert p { color: #fecaca; }
+
+    .alert-timer {
+        font-size: 24px;
+        font-weight: 800;
+        color: white;
+    }
+
+    .complete-button {
+        border: 0;
+        border-radius: 8px;
+        padding: 11px 18px;
+        background: white;
+        color: #991b1b;
+        cursor: pointer;
+        font-weight: 800;
+    }
+
+    .complete-button:hover { background: #fee2e2; }
+
+    #result {
+        display: none;
+        text-align: center;
+    }
+
+    #resultTitle {
+        font-size: 40px;
+        margin-top: 0;
+    }
+
+    .pass { color: #22c55e; }
+    .fail { color: #ef4444; }
+
+    .result-stat {
+        margin: 14px 0;
+        font-size: 20px;
+    }
+
+    .result-code {
+        margin: 22px auto;
+        padding: 14px;
+        background: #111827;
+        border-radius: 10px;
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: 6px;
+    }
+
+    .code-entry {
+        margin: 24px auto 10px;
+        padding: 18px;
+        background: #111827;
+        border: 1px solid #374151;
+        border-radius: 12px;
+    }
+
+    .code-entry h3 {
+        margin-top: 0;
+    }
+
+    .code-entry input {
+        width: min(320px, 100%);
+        padding: 12px;
+        border: 0;
+        border-radius: 8px;
+        font-size: 18px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .code-entry input:focus {
+        outline: 3px solid #60a5fa;
+    }
+
+    #codeFeedback {
+        min-height: 24px;
+        font-weight: 700;
+    }
+
+    #tryAgainButton.hidden { display: none !important; }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 700px) {
+        .header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .stats { justify-content: flex-start; }
+
+        .start-screen,
+        .page,
+        #result {
+            margin: 25px auto;
+            padding: 15px;
+        }
+
+        .start-card,
+        .test-box,
+        .alerts-box,
+        #result {
+            padding: 25px 18px;
+        }
+
+        .start-screen h2 { font-size: 31px; }
+    }
 </style>
 </head>
-
 <body>
 
-
-<!-- HEADER -->
-
-<div class="header">
-
-    <h1>
-        🧠 Multitasking Test
-    </h1>
-
+<header class="header">
+    <h1>🧠 Multitasking Test</h1>
     <div class="stats">
-
-        <span>
-            Math:
-            <b id="score">0</b>
-        </span>
-
-        <span>
-            Question:
-            <b id="questionNumber">1</b>/15
-        </span>
-
-        <span>
-            Time:
-            <b id="time">90</b>s
-        </span>
-
+        <span>Math: <b id="score">0</b></span>
+        <span>Question: <b id="questionNumber">1</b>/15</span>
+        <span>Time: <b id="time">90</b>s</span>
     </div>
+</header>
 
-</div>
+<section id="startScreen" class="start-screen">
+    <div class="start-card">
+        <h2>🧠 Multitasking Test</h2>
+        <p>Solve 15 simple math problems while responding to urgent alerts.</p>
+        <p>🚨 Alerts can appear while you are doing math.</p>
+        <p>⚠️ If an alert reaches zero before you complete it, the test fails.</p>
+        <button id="startButton" class="primary">▶ Start Test</button>
+    </div>
+</section>
 
-
-<!-- START SCREEN -->
-
-<div
-    id="startScreen"
-    class="start-screen"
->
-
-    <h1>
-        🧠 Multitasking Test
-    </h1>
-
-    <p>
-        Solve simple math problems while responding
-        to urgent alerts.
-    </p>
-
-    <p>
-        🚨 Alerts can appear at any time.
-    </p>
-
-    <p>
-        ⚠️ If an alert reaches zero before you complete it,
-        the test ends.
-    </p>
-
-    <button
-        class="start-button"
-        onclick="startTest()"
-    >
-
-        ▶ Start Test
-
-    </button>
-
-</div>
-
-
-<!-- NAVIGATION -->
-
-<div
-    id="navigation"
-    class="nav"
->
-
-    <button
-        id="mathNav"
-        class="active"
-        onclick="showPage('math')"
-    >
-
+<nav id="navigation" class="nav" aria-label="Test navigation">
+    <button id="mathNav" class="active" type="button" aria-controls="mathPage">
         🧮 Math
-
     </button>
-
-    <button
-        id="alertsNav"
-        onclick="showPage('alerts')"
-    >
-
+    <button id="alertsNav" type="button" aria-controls="alertsPage">
         🚨 Alerts
-
-        <span
-            id="alertCount"
-            class="alert-count"
-        >
-            0
-        </span>
-
+        <span id="alertCount" class="alert-count">0</span>
     </button>
+</nav>
 
-</div>
+<main>
+    <section id="mathPage" class="page active">
+        <div class="test-box">
+            <h2>Math Test</h2>
+            <p>Solve the problem and press Submit or Enter.</p>
+            <div id="question">Ready?</div>
+            <input id="answer" type="number" inputmode="numeric" autocomplete="off" aria-label="Math answer">
+            <br>
+            <button id="submitButton" class="primary" type="button">Submit Answer</button>
 
-
-<!-- MATH PAGE -->
-
-<div
-    id="mathPage"
-    class="page"
->
-
-    <div class="test-box">
-
-        <h2>
-            Math Test
-        </h2>
-
-        <p>
-            Solve each problem as quickly and accurately
-            as possible.
-        </p>
-
-        <p>
-            Keep an eye on the Alerts tab.
-        </p>
-
-        <div id="question">
-            Ready?
+            <div class="code-box">
+                <h3>🔐 Code Word</h3>
+                <p>One letter is revealed after each question.</p>
+                <div id="codeWord"><span class="code-empty">_ _ _ _ _ _ _ _ _ _ _ _</span></div>
+            </div>
         </div>
+    </section>
 
+    <section id="alertsPage" class="page">
+        <div class="alerts-box">
+            <h2>🚨 Urgent Alerts</h2>
+            <p>Complete every active alert before its timer reaches zero.</p>
+            <div id="alertsList">
+                <div class="no-alerts">No alerts right now.</div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<section id="result">
+    <h2 id="resultTitle">Test Complete</h2>
+    <p id="resultMessage"></p>
+
+    <div class="result-stat">Math Score: <b id="finalMath">0</b>/15</div>
+    <div class="result-stat">Alerts Completed: <b id="finalAlerts">0</b></div>
+    <div class="code-entry">
+        <h3>🔐 Enter the Code Word</h3>
+        <p>What code word did you reveal during the test?</p>
         <input
-            id="answer"
-            type="number"
+            id="codeInput"
+            type="text"
             autocomplete="off"
+            placeholder="Enter code word"
+            aria-label="Enter code word"
         >
-
-        <br>
-
-        <button
-            class="main-button"
-            onclick="submitAnswer()"
-        >
-
-            Submit Answer
-
+        <button id="codeSubmitButton" class="primary" type="button">
+            Submit Code Word
         </button>
-
-
-        <!-- CODE WORD -->
-
-        <div class="code-box">
-
-            <h3>
-                🔐 Code Word
-            </h3>
-
-            <p>
-                Complete questions to reveal the code.
-            </p>
-
-            <div id="codeWord">
-                _
-            </div>
-
-        </div>
-
+        <p id="codeFeedback"></p>
     </div>
 
-</div>
-
-
-<!-- ALERTS PAGE -->
-
-<div
-    id="alertsPage"
-    class="page"
->
-
-    <div class="alerts-box">
-
-        <h2>
-            🚨 Urgent Alerts
-        </h2>
-
-        <p>
-            Complete every alert before its timer reaches zero.
-        </p>
-
-        <div id="alertsList">
-
-            <div class="no-alerts">
-                No alerts right now.
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- RESULT -->
-
-<div id="result">
-
-    <h1 id="resultTitle">
-        Test Complete
-    </h1>
-
-    <p id="resultMessage">
-    </p>
-
-    <div class="result-stat">
-
-        Math Score:
-        <b id="finalMath">0</b>/15
-
-    </div>
-
-    <div class="result-stat">
-
-        Alerts Completed:
-        <b id="finalAlerts">0</b>
-
-    </div>
-
-    <div class="result-stat">
-
-        Code Word:
-        <b id="finalCode">MULTITASKING</b>
-
-    </div>
-
-    <button
-        class="main-button"
-        onclick="tryAgain()"
-    >
-
-        🔄 Try Again
-
-    </button>
-
-</div>
-
+    <button id="tryAgainButton" class="primary hidden" type="button">🔄 Try Again</button>
+</section>
 
 <script>
+(() => {
+    "use strict";
 
-/* =====================================================
-   VARIABLES
-===================================================== */
+    const TOTAL_QUESTIONS = 15;
+    const TEST_TIME = 90;
+    const ALERT_TIME = 8;
+    const CODE_WORD = "MULTITASKING";
 
-let currentQuestion = 0;
+    let currentQuestion = 0;
+    let mathScore = 0;
+    let correctAnswer = null;
+    let timeLeft = TEST_TIME;
+    let testStarted = false;
+    let testOver = false;
+    let nextAlertId = 0;
+    let activeAlerts = 0;
+    let alertsCompleted = 0;
+    let revealedLetters = 0;
 
-let mathScore = 0;
+    let mainTimer = null;
+    let notificationTimeout = null;
 
-let correctAnswer = 0;
+    const alertTimers = new Map();
 
-let timeLeft = 90;
+    const els = {
+        startScreen: document.getElementById("startScreen"),
+        navigation: document.getElementById("navigation"),
+        mathPage: document.getElementById("mathPage"),
+        alertsPage: document.getElementById("alertsPage"),
+        mathNav: document.getElementById("mathNav"),
+        alertsNav: document.getElementById("alertsNav"),
+        alertCount: document.getElementById("alertCount"),
+        alertsList: document.getElementById("alertsList"),
+        score: document.getElementById("score"),
+        questionNumber: document.getElementById("questionNumber"),
+        time: document.getElementById("time"),
+        question: document.getElementById("question"),
+        answer: document.getElementById("answer"),
+        codeWord: document.getElementById("codeWord"),
+        result: document.getElementById("result"),
+        resultTitle: document.getElementById("resultTitle"),
+        resultMessage: document.getElementById("resultMessage"),
+        finalMath: document.getElementById("finalMath"),
+        finalAlerts: document.getElementById("finalAlerts"),
+        codeInput: document.getElementById("codeInput"),
+        codeSubmitButton: document.getElementById("codeSubmitButton"),
+        codeFeedback: document.getElementById("codeFeedback"),
+        startButton: document.getElementById("startButton"),
+        submitButton: document.getElementById("submitButton"),
+        tryAgainButton: document.getElementById("tryAgainButton")
+    };
 
-let testStarted = false;
-
-let testOver = false;
-
-let alertID = 0;
-
-let activeAlerts = 0;
-
-let alertsCompleted = 0;
-
-let mainTimer = null;
-
-let notificationTimeout = null;
-
-let alertTimers = {};
-
-
-/*
-    CODE WORD
-
-    MULTITASKING = 12 letters
-*/
-
-const codeWord = "MULTITASKING";
-
-let revealedLetters = 0;
-
-
-/* =====================================================
-   START TEST
-===================================================== */
-
-function startTest() {
-
-    if (testStarted) {
-        return;
+    function clearMainTimer() {
+        if (mainTimer !== null) {
+            clearInterval(mainTimer);
+            mainTimer = null;
+        }
     }
 
-    testStarted = true;
+    function clearAlertSchedule() {
+        if (notificationTimeout !== null) {
+            clearTimeout(notificationTimeout);
+            notificationTimeout = null;
+        }
+    }
 
-    testOver = false;
+    function clearAllAlertTimers() {
+        for (const timer of alertTimers.values()) {
+            clearInterval(timer);
+        }
+        alertTimers.clear();
+    }
 
-    document
-        .getElementById("startScreen")
-        .style.display = "none";
+    function resetAlertList() {
+        els.alertsList.innerHTML = '<div class="no-alerts">No alerts right now.</div>';
+    }
 
-    document
-        .getElementById("navigation")
-        .style.display = "flex";
+    function updateStats() {
+        els.score.textContent = mathScore;
+        els.questionNumber.textContent = Math.min(currentQuestion + 1, TOTAL_QUESTIONS);
+        els.time.textContent = timeLeft;
+        els.alertCount.textContent = activeAlerts;
+        els.alertCount.style.display = activeAlerts > 0 ? "flex" : "none";
+    }
 
-    document
-        .getElementById("mathPage")
-        .style.display = "block";
-
-    document
-        .getElementById("mathPage")
-        .classList.add("active");
-
-    generateQuestion();
-
-    document
-        .getElementById("answer")
-        .focus();
-
-    startMainTimer();
-
-    scheduleAlert();
-
-}
-
-
-/* =====================================================
-   MAIN TIMER
-===================================================== */
-
-function startMainTimer() {
-
-    clearInterval(mainTimer);
-
-    mainTimer = setInterval(function() {
-
-        if (testOver) {
+    function updateCodeWord() {
+        if (revealedLetters === 0) {
+            els.codeWord.innerHTML =
+                '<span class="code-empty">_ _ _ _ _ _ _ _ _ _ _ _</span>';
             return;
         }
 
-        timeLeft--;
+        let html = "";
+        for (let i = 0; i < CODE_WORD.length; i++) {
+            html += i < revealedLetters
+                ? `<span class="code-letter">${CODE_WORD[i]}</span>`
+                : '<span class="code-empty">_</span>';
+        }
+        els.codeWord.innerHTML = html;
+    }
 
-        document
-            .getElementById("time")
-            .textContent = timeLeft;
+    function showPage(page) {
+        if (!testStarted || testOver) return;
 
-        if (timeLeft <= 0) {
+        const showMath = page === "math";
+        const showAlerts = page === "alerts";
 
-            failTest(
-                "You ran out of time."
-            );
+        // Make the page visibility explicit. Do not rely on inline
+        // display values left over from the start/result screens.
+        els.mathPage.classList.toggle("active", showMath);
+        els.alertsPage.classList.toggle("active", showAlerts);
 
+        els.mathNav.classList.toggle("active", showMath);
+        els.alertsNav.classList.toggle("active", showAlerts);
+
+        els.mathPage.setAttribute("aria-hidden", String(!showMath));
+        els.alertsPage.setAttribute("aria-hidden", String(!showAlerts));
+
+        if (showMath) {
+            setTimeout(() => els.answer.focus(), 0);
+        }
+    }
+
+    function generateQuestion() {
+        let a = Math.floor(Math.random() * 15) + 1;
+        let b = Math.floor(Math.random() * 15) + 1;
+        const type = Math.floor(Math.random() * 3);
+
+        if (type === 0) {
+            correctAnswer = a + b;
+            els.question.textContent = `${a} + ${b} = ?`;
+        } else if (type === 1) {
+            if (a < b) [a, b] = [b, a];
+            correctAnswer = a - b;
+            els.question.textContent = `${a} − ${b} = ?`;
+        } else {
+            a = Math.floor(Math.random() * 10) + 1;
+            b = Math.floor(Math.random() * 10) + 1;
+            correctAnswer = a * b;
+            els.question.textContent = `${a} × ${b} = ?`;
         }
 
-    }, 1000);
-
-}
-
-
-/* =====================================================
-   PAGE SWITCHING
-===================================================== */
-
-function showPage(page) {
-
-    if (!testStarted || testOver) {
-        return;
+        els.answer.value = "";
+        setTimeout(() => els.answer.focus(), 0);
     }
 
-    document
-        .getElementById("mathPage")
-        .classList.remove("active");
-
-    document
-        .getElementById("alertsPage")
-        .classList.remove("active");
-
-    document
-        .getElementById("mathNav")
-        .classList.remove("active");
-
-    document
-        .getElementById("alertsNav")
-        .classList.remove("active");
-
-
-    if (page === "math") {
-
-        document
-            .getElementById("mathPage")
-            .classList.add("active");
-
-        document
-            .getElementById("mathNav")
-            .classList.add("active");
-
-        document
-            .getElementById("answer")
-            .focus();
-
+    function revealNextLetter() {
+        revealedLetters = Math.min(revealedLetters + 1, CODE_WORD.length);
+        updateCodeWord();
     }
 
+    function submitAnswer() {
+        if (!testStarted || testOver) return;
 
-    if (page === "alerts") {
+        const raw = els.answer.value.trim();
 
-        document
-            .getElementById("alertsPage")
-            .classList.add("active");
-
-        document
-            .getElementById("alertsNav")
-            .classList.add("active");
-
-    }
-
-}
-
-
-/* =====================================================
-   GENERATE MATH QUESTION
-===================================================== */
-
-function generateQuestion() {
-
-    let a =
-        Math.floor(Math.random() * 15) + 1;
-
-    let b =
-        Math.floor(Math.random() * 15) + 1;
-
-    let type =
-        Math.floor(Math.random() * 3);
-
-
-    if (type === 0) {
-
-        correctAnswer = a + b;
-
-        document
-            .getElementById("question")
-            .textContent =
-            `${a} + ${b} = ?`;
-
-    }
-
-
-    else if (type === 1) {
-
-        if (a < b) {
-
-            let temp = a;
-
-            a = b;
-
-            b = temp;
-
-        }
-
-        correctAnswer = a - b;
-
-        document
-            .getElementById("question")
-            .textContent =
-            `${a} − ${b} = ?`;
-
-    }
-
-
-    else {
-
-        a =
-            Math.floor(Math.random() * 10) + 1;
-
-        b =
-            Math.floor(Math.random() * 10) + 1;
-
-        correctAnswer = a * b;
-
-        document
-            .getElementById("question")
-            .textContent =
-            `${a} × ${b} = ?`;
-
-    }
-
-}
-
-
-/* =====================================================
-   REVEAL CODE LETTER
-===================================================== */
-
-function revealCodeLetter() {
-
-    /*
-        Only the first 12 questions reveal letters.
-    */
-
-    if (revealedLetters < codeWord.length) {
-
-        revealedLetters++;
-
-        let letters = "";
-
-        for (
-            let i = 0;
-            i < revealedLetters;
-            i++
-        ) {
-
-            letters += `
-                <span class="code-letter">
-                    ${codeWord[i]}
-                </span>
-            `;
-
-        }
-
-        document
-            .getElementById("codeWord")
-            .innerHTML = letters;
-
-    }
-
-}
-
-
-/* =====================================================
-   SUBMIT ANSWER
-===================================================== */
-
-function submitAnswer() {
-
-    if (testOver) {
-        return;
-    }
-
-    let input =
-        document.getElementById("answer");
-
-    let answer =
-        Number(input.value);
-
-
-    if (input.value.trim() !== "") {
-
-        if (answer === correctAnswer) {
-
+        if (raw !== "" && Number(raw) === correctAnswer) {
             mathScore++;
-
-            document
-                .getElementById("score")
-                .textContent =
-                mathScore;
-
         }
 
+        revealNextLetter();
+        currentQuestion++;
+
+        updateStats();
+
+        if (currentQuestion >= TOTAL_QUESTIONS) {
+            finishTest();
+            return;
+        }
+
+        generateQuestion();
     }
 
+    function startMainTimer() {
+        clearMainTimer();
 
-    /*
-        Reveal one letter after EVERY question.
+        mainTimer = setInterval(() => {
+            if (testOver) return;
 
-        Question 1 = M
-        Question 2 = U
-        Question 3 = L
-        Question 4 = T
-        Question 5 = I
-        Question 6 = T
-        Question 7 = A
-        Question 8 = S
-        Question 9 = K
-        Question 10 = I
-        Question 11 = N
-        Question 12 = G
-    */
+            timeLeft--;
+            updateStats();
 
-    revealCodeLetter();
-
-
-    currentQuestion++;
-
-
-    if (currentQuestion >= 15) {
-
-        finishTest();
-
-        return;
-
-    }
-
-
-    document
-        .getElementById("questionNumber")
-        .textContent =
-        currentQuestion + 1;
-
-
-    input.value = "";
-
-    generateQuestion();
-
-    input.focus();
-
-}
-
-
-/* =====================================================
-   ENTER KEY
-===================================================== */
-
-document
-    .getElementById("answer")
-    .addEventListener(
-        "keydown",
-        function(event) {
-
-            if (event.key === "Enter") {
-
-                submitAnswer();
-
+            if (timeLeft <= 0) {
+                failTest("You ran out of time.");
             }
-
-        }
-    );
-
-
-/* =====================================================
-   CREATE ALERT
-===================================================== */
-
-function createAlert() {
-
-    if (testOver) {
-        return;
+        }, 1000);
     }
 
-    alertID++;
+    function createAlert() {
+        if (!testStarted || testOver) return;
 
-    let id = alertID;
+        nextAlertId++;
+        const id = nextAlertId;
+        activeAlerts++;
+        updateStats();
 
-    activeAlerts++;
-
-    updateAlertCount();
-
-
-    const alertTypes = [
-
-        {
-            title: "🚨 URGENT SYSTEM ALERT",
-
-            message:
-            "System attention is required. Confirm this alert."
-        },
-
-        {
-            title: "⚠️ PRIORITY MESSAGE",
-
-            message:
-            "This message requires immediate acknowledgement."
-        },
-
-        {
-            title: "🔴 IMPORTANT NOTICE",
-
-            message:
-            "Please confirm that you received this notification."
-        },
-
-        {
-            title: "🚨 ACTION REQUIRED",
-
-            message:
-            "Complete this alert before the timer expires."
-        }
-
-    ];
-
-
-    let selected =
-        alertTypes[
-            Math.floor(
-                Math.random() * alertTypes.length
-            )
+        const alertTypes = [
+            ["🚨 URGENT SYSTEM ALERT", "System attention is required. Confirm this alert."],
+            ["⚠️ PRIORITY MESSAGE", "This message requires immediate acknowledgement."],
+            ["🔴 IMPORTANT NOTICE", "Please confirm that you received this notification."],
+            ["🚨 ACTION REQUIRED", "Complete this alert before the timer expires."]
         ];
 
+        const selected = alertTypes[Math.floor(Math.random() * alertTypes.length)];
 
-    let alertElement =
-        document.createElement("div");
+        const card = document.createElement("div");
+        card.className = "alert";
+        card.id = `alert-${id}`;
 
-    alertElement.className = "alert";
+        card.innerHTML = `
+            <h3>${selected[0]}</h3>
+            <p>${selected[1]}</p>
+            <p>
+                Time remaining:
+                <span class="alert-timer" id="timer-${id}">${ALERT_TIME}</span>
+                seconds
+            </p>
+            <button class="complete-button" type="button">✓ Complete Alert</button>
+        `;
 
-    alertElement.id =
-        "alert-" + id;
+        card.querySelector(".complete-button").addEventListener("click", () => {
+            completeAlert(id);
+        });
 
+        const noAlerts = els.alertsList.querySelector(".no-alerts");
+        if (noAlerts) noAlerts.remove();
 
-    alertElement.innerHTML = `
+        els.alertsList.appendChild(card);
 
-        <h3>
-            ${selected.title}
-        </h3>
+        let seconds = ALERT_TIME;
 
-        <p>
-            ${selected.message}
-        </p>
-
-        <p>
-            Time remaining:
-
-            <span
-                class="alert-timer"
-                id="timer-${id}"
-            >
-                8
-            </span>
-
-            seconds
-        </p>
-
-        <button
-            class="complete-button"
-            onclick="completeAlert(${id})"
-        >
-
-            ✓ Complete Alert
-
-        </button>
-
-    `;
-
-
-    let list =
-        document.getElementById("alertsList");
-
-
-    let noAlerts =
-        list.querySelector(".no-alerts");
-
-
-    if (noAlerts) {
-        noAlerts.remove();
-    }
-
-
-    list.appendChild(alertElement);
-
-
-    /*
-        Start individual timer.
-    */
-
-    let seconds = 8;
-
-
-    alertTimers[id] =
-        setInterval(function() {
-
+        const timer = setInterval(() => {
             if (testOver) {
-
-                clearInterval(
-                    alertTimers[id]
-                );
-
-                delete alertTimers[id];
-
+                clearInterval(timer);
+                alertTimers.delete(id);
                 return;
-
             }
-
 
             seconds--;
 
-
-            let timer =
-                document.getElementById(
-                    "timer-" + id
-                );
-
-
-            if (timer) {
-
-                timer.textContent =
-                    seconds;
-
-            }
-
+            const timerEl = document.getElementById(`timer-${id}`);
+            if (timerEl) timerEl.textContent = seconds;
 
             if (seconds <= 0) {
-
-                clearInterval(
-                    alertTimers[id]
-                );
-
-                delete alertTimers[id];
-
+                clearInterval(timer);
+                alertTimers.delete(id);
 
                 if (!testOver) {
-
-                    failTest(
-                        "You missed an urgent alert."
-                    );
-
+                    failTest("You missed an urgent alert.");
                 }
-
             }
-
         }, 1000);
 
-}
-
-
-/* =====================================================
-   COMPLETE ALERT
-===================================================== */
-
-function completeAlert(id) {
-
-    if (testOver) {
-        return;
+        alertTimers.set(id, timer);
     }
 
+    function completeAlert(id) {
+        if (!testStarted || testOver) return;
 
-    let alertElement =
-        document.getElementById(
-            "alert-" + id
-        );
+        const card = document.getElementById(`alert-${id}`);
+        if (!card) return;
 
-
-    if (!alertElement) {
-        return;
-    }
-
-
-    /*
-        Stop this alert's timer.
-    */
-
-    if (alertTimers[id]) {
-
-        clearInterval(
-            alertTimers[id]
-        );
-
-        delete alertTimers[id];
-
-    }
-
-
-    alertElement.remove();
-
-
-    activeAlerts--;
-
-    alertsCompleted++;
-
-    updateAlertCount();
-
-
-    let remaining =
-        document.querySelectorAll(
-            "#alertsList .alert"
-        );
-
-
-    if (remaining.length === 0) {
-
-        document
-            .getElementById("alertsList")
-            .innerHTML = `
-
-                <div class="no-alerts">
-                    All alerts completed ✓
-                </div>
-
-            `;
-
-    }
-
-
-    /*
-        Return to Math.
-    */
-
-    showPage("math");
-
-}
-
-
-/* =====================================================
-   UPDATE ALERT COUNT
-===================================================== */
-
-function updateAlertCount() {
-
-    let counter =
-        document.getElementById(
-            "alertCount"
-        );
-
-
-    counter.textContent =
-        activeAlerts;
-
-
-    if (activeAlerts > 0) {
-
-        counter.style.display =
-            "flex";
-
-    }
-
-    else {
-
-        counter.style.display =
-            "none";
-
-    }
-
-}
-
-
-/* =====================================================
-   SCHEDULE ALERT
-===================================================== */
-
-function scheduleAlert() {
-
-    if (testOver) {
-        return;
-    }
-
-
-    let delay =
-        Math.floor(
-            Math.random() * 7000
-        ) + 5000;
-
-
-    notificationTimeout =
-        setTimeout(function() {
-
-            createAlert();
-
-            scheduleAlert();
-
-        }, delay);
-
-}
-
-
-/* =====================================================
-   CLEAR ALERT TIMERS
-===================================================== */
-
-function clearAlertTimers() {
-
-    Object.keys(alertTimers).forEach(
-        function(id) {
-
-            clearInterval(
-                alertTimers[id]
-            );
-
+        // Critical fix: completing an alert ALWAYS stops that alert's countdown.
+        const timer = alertTimers.get(id);
+        if (timer !== undefined) {
+            clearInterval(timer);
+            alertTimers.delete(id);
         }
-    );
 
+        card.remove();
 
-    alertTimers = {};
+        activeAlerts = Math.max(0, activeAlerts - 1);
+        alertsCompleted++;
+        updateStats();
 
-}
+        if (!els.alertsList.querySelector(".alert")) {
+            resetAlertList();
+        }
 
-
-/* =====================================================
-   FAIL TEST
-===================================================== */
-
-function failTest(reason) {
-
-    if (testOver) {
-        return;
+        // After handling an alert, go back to the math task.
+        showPage("math");
     }
 
+    function scheduleAlert() {
+        clearAlertSchedule();
 
-    testOver = true;
+        if (!testStarted || testOver) return;
 
+        const delay = Math.floor(Math.random() * 7000) + 5000;
 
-    clearInterval(mainTimer);
-
-    clearTimeout(notificationTimeout);
-
-    clearAlertTimers();
-
-
-    document
-        .getElementById("mathPage")
-        .style.display = "none";
-
-
-    document
-        .getElementById("alertsPage")
-        .style.display = "none";
-
-
-    document
-        .getElementById("navigation")
-        .style.display = "none";
-
-
-    document
-        .getElementById("result")
-        .style.display = "block";
-
-
-    document
-        .getElementById("resultTitle")
-        .textContent =
-        "❌ TEST FAILED";
-
-
-    document
-        .getElementById("resultTitle")
-        .className =
-        "fail";
-
-
-    document
-        .getElementById("resultMessage")
-        .textContent =
-        reason;
-
-
-    document
-        .getElementById("finalMath")
-        .textContent =
-        mathScore;
-
-
-    document
-        .getElementById("finalAlerts")
-        .textContent =
-        alertsCompleted;
-
-
-    document
-        .getElementById("finalCode")
-        .textContent =
-        document
-            .getElementById("codeWord")
-            .innerText
-            .replace(/\s/g, "") || "Incomplete";
-
-}
-
-
-/* =====================================================
-   FINISH TEST
-===================================================== */
-
-function finishTest() {
-
-    if (testOver) {
-        return;
+        notificationTimeout = setTimeout(() => {
+            notificationTimeout = null;
+            if (testStarted && !testOver) {
+                createAlert();
+                scheduleAlert();
+            }
+        }, delay);
     }
 
+    function showResult(title, message, failed) {
+        clearMainTimer();
+        clearAlertSchedule();
+        clearAllAlertTimers();
 
-    testOver = true;
+        testOver = true;
 
+        els.navigation.style.display = "none";
+        els.mathPage.classList.remove("active");
+        els.alertsPage.classList.remove("active");
+
+        els.result.style.display = "block";
 
-    clearInterval(mainTimer);
-
-    clearTimeout(notificationTimeout);
-
-    clearAlertTimers();
-
-
-    document
-        .getElementById("mathPage")
-        .style.display = "none";
-
-
-    document
-        .getElementById("alertsPage")
-        .style.display = "none";
-
-
-    document
-        .getElementById("navigation")
-        .style.display = "none";
-
-
-    document
-        .getElementById("result")
-        .style.display = "block";
-
-
-    document
-        .getElementById("resultTitle")
-        .textContent =
-        "🎉 TEST COMPLETE";
-
-
-    document
-        .getElementById("resultTitle")
-        .className =
-        "pass";
-
-
-    document
-        .getElementById("resultMessage")
-        .textContent =
-        "You completed all 15 math questions.";
-
-
-    document
-        .getElementById("finalMath")
-        .textContent =
-        mathScore;
-
-
-    document
-        .getElementById("finalAlerts")
-        .textContent =
-        alertsCompleted;
-
-
-    document
-        .getElementById("finalCode")
-        .textContent =
-        "MULTITASKING";
-
-}
-
-
-/* =====================================================
-   TRY AGAIN
-===================================================== */
-
-function tryAgain() {
-
-    clearInterval(mainTimer);
-
-    clearTimeout(notificationTimeout);
-
-    clearAlertTimers();
-
-
-    /*
-        Reset everything.
-    */
-
-    currentQuestion = 0;
-
-    mathScore = 0;
-
-    correctAnswer = 0;
-
-    timeLeft = 90;
-
-    testStarted = true;
-
-    testOver = false;
-
-    alertID = 0;
-
-    activeAlerts = 0;
-
-    alertsCompleted = 0;
-
-    revealedLetters = 0;
-
-
-    /*
-        Reset score.
-    */
-
-    document
-        .getElementById("score")
-        .textContent = "0";
-
-
-    document
-        .getElementById("questionNumber")
-        .textContent = "1";
-
-
-    document
-        .getElementById("time")
-        .textContent = "90";
-
-
-    /*
-        Reset code word.
-    */
-
-    document
-        .getElementById("codeWord")
-        .innerHTML = "_";
-
-
-    document
-        .getElementById("answer")
-        .value = "";
-
-
-    /*
-        Clear alerts.
-    */
-
-    document
-        .getElementById("alertsList")
-        .innerHTML = `
-
-            <div class="no-alerts">
-                No alerts right now.
-            </div>
-
-        `;
-
-
-    updateAlertCount();
-
-
-    /*
-        Hide result.
-    */
-
-    document
-        .getElementById("result")
-        .style.display = "none";
-
-
-    /*
-        Show navigation.
-    */
-
-    document
-        .getElementById("navigation")
-        .style.display = "flex";
-
-
-    /*
-        Start directly on Math.
-    */
-
-    document
-        .getElementById("mathPage")
-        .style.display = "block";
-
-
-    document
-        .getElementById("alertsPage")
-        .style.display = "none";
-
-
-    document
-        .getElementById("mathPage")
-        .classList.add("active");
-
-
-    document
-        .getElementById("alertsPage")
-        .classList.remove("active");
-
-
-    document
-        .getElementById("mathNav")
-        .classList.add("active");
-
-
-    document
-        .getElementById("alertsNav")
-        .classList.remove("active");
-
-
-    /*
-        New question.
-    */
-
-    generateQuestion();
-
-
-    document
-        .getElementById("answer")
-        .focus();
-
-
-    /*
-        Restart timers.
-    */
-
-    startMainTimer();
-
-    scheduleAlert();
-
-}
-
+        els.resultTitle.textContent = title;
+        els.resultTitle.className = failed ? "fail" : "pass";
+        els.resultMessage.textContent = message;
+
+        els.finalMath.textContent = mathScore;
+        els.finalAlerts.textContent = alertsCompleted;
+        // The code word is intentionally not displayed.
+    }
+
+    function failTest(reason) {
+        if (testOver) return;
+        showResult("❌ TEST FAILED", reason, true);
+        els.tryAgainButton.classList.remove("hidden");
+    }
+
+    function finishTest() {
+        if (testOver) return;
+
+        // The math portion is finished, but the entire test is NOT
+        // complete until the participant enters the correct code word.
+        clearMainTimer();
+        clearAlertSchedule();
+        clearAllAlertTimers();
+
+        els.navigation.style.display = "none";
+        els.mathPage.classList.remove("active");
+        els.alertsPage.classList.remove("active");
+
+        testStarted = true;
+        testOver = false;
+
+        els.result.style.display = "block";
+
+        els.resultTitle.textContent = "🔐 Enter the Code Word";
+        els.resultTitle.className = "";
+        els.resultMessage.textContent =
+            "You finished the math section. Enter the code word to finish the test.";
+
+        els.finalMath.textContent = mathScore;
+        els.finalAlerts.textContent = alertsCompleted;
+
+        els.codeInput.value = "";
+        els.codeFeedback.textContent = "";
+        els.tryAgainButton.classList.add("hidden");
+
+        setTimeout(() => els.codeInput.focus(), 0);
+    }
+
+    function checkCodeWord() {
+        if (testOver) return;
+
+        const entered = els.codeInput.value.trim().toUpperCase();
+
+        if (entered === CODE_WORD) {
+            // Only now is the entire test actually complete.
+            testOver = true;
+
+            els.codeFeedback.textContent = "✅ Correct! Test complete.";
+            els.codeFeedback.className = "pass";
+
+            els.resultTitle.textContent = "🎉 TEST COMPLETE";
+            els.resultTitle.className = "pass";
+            els.resultMessage.textContent =
+                "You completed the math section and entered the correct code word.";
+
+            els.tryAgainButton.classList.remove("hidden");
+        } else if (entered === "") {
+            els.codeFeedback.textContent = "Enter the code word to finish the test.";
+            els.codeFeedback.className = "fail";
+
+            els.resultTitle.textContent = "🔐 Enter the Code Word";
+            els.resultTitle.className = "";
+            els.resultMessage.textContent =
+                "The test is not complete until you enter the correct code word.";
+
+            els.tryAgainButton.classList.add("hidden");
+        } else {
+            // Wrong code does not finish the test.
+            testOver = false;
+
+            els.codeFeedback.textContent = "❌ Incorrect code word. The test is not complete.";
+            els.codeFeedback.className = "fail";
+
+            els.resultTitle.textContent = "🔐 Enter the Code Word";
+            els.resultTitle.className = "";
+            els.resultMessage.textContent =
+                "The test is not complete until you enter the correct code word.";
+
+            els.tryAgainButton.classList.add("hidden");
+            els.codeInput.select();
+        }
+    }
+
+    function prepareNewTest() {
+        clearMainTimer();
+        clearAlertSchedule();
+        clearAllAlertTimers();
+
+        currentQuestion = 0;
+        mathScore = 0;
+        correctAnswer = null;
+        timeLeft = TEST_TIME;
+        testStarted = true;
+        testOver = false;
+        nextAlertId = 0;
+        activeAlerts = 0;
+        alertsCompleted = 0;
+        revealedLetters = 0;
+
+        els.result.style.display = "none";
+        els.startScreen.style.display = "none";
+        els.navigation.style.display = "flex";
+
+        resetAlertList();
+        updateStats();
+        updateCodeWord();
+        els.codeInput.value = "";
+        els.codeFeedback.textContent = "";
+        els.tryAgainButton.classList.add("hidden");
+
+        showPage("math");
+        generateQuestion();
+        startMainTimer();
+        scheduleAlert();
+    }
+
+    function startTest() {
+        if (testStarted && !testOver) return;
+        prepareNewTest();
+    }
+
+    // Button events
+    els.startButton.addEventListener("click", startTest);
+    els.submitButton.addEventListener("click", submitAnswer);
+    els.tryAgainButton.addEventListener("click", prepareNewTest);
+    els.codeSubmitButton.addEventListener("click", checkCodeWord);
+
+    els.codeInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            checkCodeWord();
+        }
+    });
+    els.mathNav.addEventListener("click", (event) => {
+        event.preventDefault();
+        showPage("math");
+    });
+
+    els.alertsNav.addEventListener("click", (event) => {
+        event.preventDefault();
+        showPage("alerts");
+    });
+
+    // Enter submits the current math question.
+    els.answer.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            submitAnswer();
+        }
+    });
+
+    // Initial UI state
+    els.startScreen.style.display = "block";
+    els.navigation.style.display = "none";
+    els.mathPage.classList.remove("active");
+    els.alertsPage.classList.remove("active");
+    els.result.style.display = "none";
+    updateStats();
+    updateCodeWord();
+})();
 </script>
-
 </body>
 </html>
